@@ -74,6 +74,7 @@ dependencies {
 
     //DI Hilt
     implementation hilt.hiltAndroid
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt hilt.kaptHiltAndroidCompiler
 
     //For Hilt support for ViewModel
