@@ -1,7 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
 }
+
+apply from: '../dependencies.gradle'
 
 android {
     compileSdk 31
@@ -14,6 +19,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -29,15 +35,59 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+}
+
+kapt {
+    correctErrorTypes true
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation androidx.coreKtx
+    implementation androidx.appCompat
+    implementation androidx.constraintlayout
+    implementation androidx.lifecycleExt
+    implementation google.material
+
+    //Activity extension, referring with  "by viewModels"
+    implementation androidx.activityKtx
+
+    //Adding Swipe Refresh Layout Dependency
+    implementation androidx.swiperefreshlayout
+
+    // LiveData
+    implementation androidx.lifecycleLiveData
+
+    // ViewModel
+    implementation androidx.lifecycleViewModel
+
+    // Navigation
+    implementation androidx.navigationFragment
+    implementation androidx.navigationUi
+
+    //DI Hilt
+    implementation hilt.hiltAndroid
+    kapt hilt.kaptHiltAndroidCompiler
+
+    //For Hilt support for ViewModel
+    implementation hilt.hiltViewModel
+    kapt hilt.kaptHiltCompiler
+
+    //Coroutines
+    implementation kotlin.kotlinxCoroutines
+
+    // optional - Test helpers for LiveData
+    testImplementation testing.unitTestingCore
+
+    // Coroutine Testing
+    testImplementation testing.unitTestingCoroutines
+    testImplementation testing.unitTestingMockitoCore
+
+    testImplementation testing.unitTestingJunit
+    androidTestImplementation  testing.uiTestingJunit
+    androidTestImplementation  testing.uiTestingEspresso
 }
