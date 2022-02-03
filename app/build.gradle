@@ -47,6 +47,9 @@ kapt {
 
 dependencies {
 
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
     implementation androidx.coreKtx
     implementation androidx.appCompat
     implementation androidx.constraintlayout
