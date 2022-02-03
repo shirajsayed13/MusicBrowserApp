@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.shiraj.domain.model.Output
 import com.shiraj.musicbrowserapp.R
 import com.shiraj.musicbrowserapp.base.BaseFragment
 import com.shiraj.musicbrowserapp.databinding.FragmentListingBinding
@@ -32,6 +33,24 @@ class ListingFragment : BaseFragment() {
 
 
     override fun subscribeUI() {
-        TODO("Not yet implemented")
+        listingViewModel.album.observe(viewLifecycleOwner) { result ->
+            when (result.status) {
+                Output.Status.SUCCESS -> {
+                    result.data?.let {
+                        println(it)
+                    }
+                }
+                Output.Status.ERROR -> {
+                    result.message?.let {
+                        showError(it) {
+                            println()
+                        }
+                    }
+                }
+                Output.Status.LOADING -> {
+
+                }
+            }
+        }
     }
 }
