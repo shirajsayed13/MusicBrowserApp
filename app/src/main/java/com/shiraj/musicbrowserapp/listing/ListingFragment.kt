@@ -1,32 +1,37 @@
 package com.shiraj.musicbrowserapp.listing
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.shiraj.musicbrowserapp.R
+import com.shiraj.musicbrowserapp.base.BaseFragment
+import com.shiraj.musicbrowserapp.databinding.FragmentListingBinding
 
-class ListingFragment : Fragment() {
+class ListingFragment : BaseFragment() {
 
-    companion object {
-        fun newInstance() = ListingFragment()
-    }
-
-    private lateinit var viewModel: ListingViewModel
+    private val listingViewModel: ListingViewModel by viewModels()
+    private lateinit var binding: FragmentListingBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_listing, container, false)
+    ): View {
+        return if (::binding.isInitialized) {
+            binding.root
+        } else {
+            binding = FragmentListingBinding.inflate(inflater, container, false)
+            with(binding) {
+                headerTitle = this@ListingFragment.getString(R.string.listing_title)
+                root
+            }
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ListingViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
+    override fun subscribeUI() {
+        TODO("Not yet implemented")
+    }
 }
