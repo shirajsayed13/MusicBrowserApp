@@ -1,8 +1,8 @@
 package com.shiraj.musicbrowserapp.listing
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shiraj.domain.model.GenreViewItem
 import com.shiraj.musicbrowserapp.databinding.ItemGenreBinding
@@ -15,16 +15,31 @@ import com.shiraj.musicbrowserapp.databinding.ItemGenreBinding
  */
 class AlbumListingAdapter(
     private val list: ArrayList<GenreViewItem>,
-    private val onAlbumClick: (detail: GenreViewItem, view: View) -> Unit
 ) : RecyclerView.Adapter<AlbumListingAdapter.AlbumListingViewHolder>() {
-
     inner class AlbumListingViewHolder(
         private val binding: ItemGenreBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private val musicInnerListingAdapter: MusicInnerListingAdapter =
+            MusicInnerListingAdapter().also {
+                it.onAlbumViewClickListener = { albumView, position ->
+
+                }
+            }
+
+        init {
+            binding.apply {
+                rvGenre.apply {
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    adapter = musicInnerListingAdapter
+                }
+            }
+        }
+
         fun bind(item: GenreViewItem) {
             binding.item = item
             binding.position = adapterPosition
+            musicInnerListingAdapter.albumViews = item.albumView
         }
     }
 

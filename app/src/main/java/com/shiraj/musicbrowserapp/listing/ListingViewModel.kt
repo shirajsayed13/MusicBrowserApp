@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shiraj.domain.model.Album
 import com.shiraj.domain.model.GenreViewItem
-import com.shiraj.domain.model.Output
 import com.shiraj.domain.usecase.AlbumUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -38,31 +37,52 @@ class ListingViewModel @Inject constructor(
 
 
     private fun parseAlbumData(feed: Album.Feed): List<GenreViewItem> {
+        val map = mutableMapOf<String, List<GenreViewItem>>()
+        val genreViewItemList = mutableListOf<GenreViewItem>()
         val genreViewItem = mutableSetOf<GenreViewItem>()
         val albumView = mutableListOf<GenreViewItem.AlbumView>()
         feed.results.map { genreResult ->
-            albumView.add(
-                GenreViewItem.AlbumView(
-                    genreResult.artistName,
-                    genreResult.name,
-                    GenreViewItem.AlbumView.AlbumDetailView(
-                        genreResult.artistUrl
-                    ),
-                    genreResult.artworkUrl100
-                )
-            )
             genreResult.genres.map { genre ->
-                genreViewItem.add(
-                    GenreViewItem(
-                        genre.name,
-                        genre.genreId,
-                        albumView
+                if (map.containsKey(genre.name)) {
+                    albumView.add(
+                        GenreViewItem.AlbumView(
+                            genreResult.artistName,
+                            genreResult.name,
+                        )
                     )
-                )
+                    genreViewItemList.add(
+                        GenreViewItem(
+                            genre.name,
+                            albumView
+                        )
+                    )
+                    map.plus(genre.name to genreViewItemList)
+                } else {
+                    albumView.add(
+                        GenreViewItem.AlbumView(
+                            genreResult.artistName,
+                            genreResult.name,
+                        )
+                    )
+                    genreViewItemList.add(
+                        GenreViewItem(
+                            genre.name,
+                            albumView
+                        )
+                    )
+                    map.put(genre.name, genreViewItemList)
+                }
             }
         }
-        return genreViewItem.toList()
+        println("CHECK THE MAP value $map")
+        return genreViewItemList
+    }
 
+    private fun albumView(genreResult: GenreViewItem.AlbumView) {
+        GenreViewItem.AlbumView(
+            genreResult.artistName,
+            genreResult.albumName,
+        )
     }
 
 }

@@ -36,7 +36,7 @@ class ListingFragment : BaseFragment() {
 
 
     override fun subscribeUI() {
-        albumListingAdapter = AlbumListingAdapter(arrayListOf(), onAlbumClick)
+        albumListingAdapter = AlbumListingAdapter(arrayListOf())
         binding.apply {
             rvGenre.adapter = albumListingAdapter
         }
@@ -48,13 +48,4 @@ class ListingFragment : BaseFragment() {
         }
     }
 
-    /**
-     * @property onAlbumClick to handle the GenreView item click.
-     */
-    private val onAlbumClick: (star: GenreViewItem, view: View) -> Unit =
-        { star, view ->
-            findNavController().navigate(
-                R.id.action_listingFragment_to_detailFragment,
-            )
-        }
 }
