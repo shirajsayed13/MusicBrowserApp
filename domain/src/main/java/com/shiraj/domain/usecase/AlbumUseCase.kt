@@ -2,6 +2,7 @@ package com.shiraj.domain.usecase
 
 import com.shiraj.domain.model.Output
 import com.shiraj.domain.model.Album
+import com.shiraj.domain.model.GenreViewItem
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -12,5 +13,5 @@ interface AlbumUseCase {
     /**
      * UseCase Method to fetch the Album from Data Layer
      */
-    suspend fun execute(): Flow<Output<Album>>
+    suspend fun execute(): Flow<Output<List<GenreViewItem>>?>
 }

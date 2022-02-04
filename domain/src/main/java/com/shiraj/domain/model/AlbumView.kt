@@ -9,4 +9,3 @@ data class GenreViewItem(
         val albumName: String,
     )
 }
-

@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.shiraj.domain.model.Album
-import com.shiraj.domain.model.GenreViewItem
+import com.shiraj.domain.model.Output
 import com.shiraj.musicbrowserapp.R
 import com.shiraj.musicbrowserapp.base.BaseFragment
 import com.shiraj.musicbrowserapp.databinding.FragmentListingBinding
@@ -41,11 +39,26 @@ class ListingFragment : BaseFragment() {
             rvGenre.adapter = albumListingAdapter
         }
         listingViewModel.album.observe(viewLifecycleOwner) { result ->
-            result?.let {
-                println("SUCCESS check album feed fragment value $it")
-                albumListingAdapter.update(it)
+            when (result.status) {
+                Output.Status.SUCCESS -> {
+                    result.data?.let { list ->
+                        binding.loading.hide()
+                        albumListingAdapter.update(list)
+                    }
+                }
+
+                Output.Status.ERROR -> {
+                    result.message?.let {
+                        showError(it) {
+                            listingViewModel.fetchAlbum()
+                        }
+                    }
+                }
+
+                Output.Status.LOADING -> {
+                    binding.loading.show()
+                }
             }
         }
     }
-
 }
