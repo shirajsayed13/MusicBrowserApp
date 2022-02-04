@@ -7,5 +7,6 @@ data class GenreViewItem(
     data class AlbumView(
         val artistName: String,
         val albumName: String,
+        val artworkUrl100: String
     )
 }

@@ -35,7 +35,4 @@ class ListingViewModel @Inject constructor(
             }
         }
     }
-
-
-
 }

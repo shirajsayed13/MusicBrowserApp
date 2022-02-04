@@ -38,7 +38,8 @@ internal class AlbumRepositoryImpl @Inject constructor(
                             value.add(
                                 GenreViewItem.AlbumView(
                                     result.artistName,
-                                    result.name
+                                    result.name,
+                                    result.artworkUrl100
                                 )
                             )
                         }
@@ -49,7 +50,8 @@ internal class AlbumRepositoryImpl @Inject constructor(
                     albumView.add(
                         GenreViewItem.AlbumView(
                             result.artistName,
-                            result.name
+                            result.name,
+                            result.artworkUrl100
                         )
                     )
                     map[genre.name] = albumView
