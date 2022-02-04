@@ -3,9 +3,14 @@ package com.shiraj.musicbrowserapp.listing
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.shiraj.domain.model.GenreViewItem
+import com.shiraj.musicbrowserapp.R
 import com.shiraj.musicbrowserapp.databinding.ItemMusicBinding
+import com.shiraj.musicbrowserapp.detail.DetailFragment
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -17,7 +22,6 @@ import kotlin.properties.Delegates
  */
 class MusicInnerListingAdapter @Inject constructor() : RecyclerView.Adapter<MusicInnerListingAdapter.AlbumListingViewHolder>() {
     internal var albumViews: List<GenreViewItem.AlbumView> by Delegates.observable(listOf()) { _, _, _ -> notifyDataSetChanged() }
-    internal var onAlbumViewClickListener: (GenreViewItem.AlbumView, Int) -> Unit = { _, _ -> }
 
     inner class AlbumListingViewHolder(
         private val binding: ItemMusicBinding

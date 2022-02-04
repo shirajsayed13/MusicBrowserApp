@@ -20,17 +20,13 @@ class AlbumListingAdapter(
         private val binding: ItemGenreBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private val musicInnerListingAdapter: MusicInnerListingAdapter =
-            MusicInnerListingAdapter().also {
-                it.onAlbumViewClickListener = { albumView, position ->
-
-                }
-            }
+        private val musicInnerListingAdapter: MusicInnerListingAdapter = MusicInnerListingAdapter()
 
         init {
             binding.apply {
                 rvGenre.apply {
-                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter = musicInnerListingAdapter
                 }
             }

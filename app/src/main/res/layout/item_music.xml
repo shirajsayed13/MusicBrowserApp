@@ -27,7 +27,8 @@
             app:imageUrl="@{item.artworkUrl100}"
             app:isSmallerImage="@{true}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/RoundCornerImageViewShape" />
 
         <TextView
             android:id="@+id/tv_album_name"
