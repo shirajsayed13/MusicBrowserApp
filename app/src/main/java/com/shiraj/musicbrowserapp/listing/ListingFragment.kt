@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.shiraj.domain.model.Output
+import androidx.navigation.fragment.findNavController
+import com.shiraj.domain.model.Album
+import com.shiraj.domain.model.GenreViewItem
 import com.shiraj.musicbrowserapp.R
 import com.shiraj.musicbrowserapp.base.BaseFragment
 import com.shiraj.musicbrowserapp.databinding.FragmentListingBinding
@@ -14,6 +16,7 @@ class ListingFragment : BaseFragment() {
 
     private val listingViewModel: ListingViewModel by viewModels()
     private lateinit var binding: FragmentListingBinding
+    private lateinit var albumListingAdapter: AlbumListingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,24 +36,25 @@ class ListingFragment : BaseFragment() {
 
 
     override fun subscribeUI() {
+        albumListingAdapter = AlbumListingAdapter(arrayListOf(), onAlbumClick)
+        binding.apply {
+            rvGenre.adapter = albumListingAdapter
+        }
         listingViewModel.album.observe(viewLifecycleOwner) { result ->
-            when (result.status) {
-                Output.Status.SUCCESS -> {
-                    result.data?.let {
-                        println(it)
-                    }
-                }
-                Output.Status.ERROR -> {
-                    result.message?.let {
-                        showError(it) {
-                            println()
-                        }
-                    }
-                }
-                Output.Status.LOADING -> {
-
-                }
+            result?.let {
+                println("SUCCESS check album feed fragment value $it")
+                albumListingAdapter.update(it)
             }
         }
     }
+
+    /**
+     * @property onAlbumClick to handle the GenreView item click.
+     */
+    private val onAlbumClick: (star: GenreViewItem, view: View) -> Unit =
+        { star, view ->
+            findNavController().navigate(
+                R.id.action_listingFragment_to_detailFragment,
+            )
+        }
 }

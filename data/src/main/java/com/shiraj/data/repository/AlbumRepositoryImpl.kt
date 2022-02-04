@@ -1,8 +1,8 @@
 package com.shiraj.data.repository
 
 import com.shiraj.data.remote.AlbumRemoteDataSource
-import com.shiraj.domain.model.Output
 import com.shiraj.domain.model.Album
+import com.shiraj.domain.model.Output
 import com.shiraj.domain.repository.AlbumRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -24,5 +24,6 @@ internal class AlbumRepositoryImpl @Inject constructor(
             emit(result)
         }.flowOn(Dispatchers.IO)
     }
+
 
 }
