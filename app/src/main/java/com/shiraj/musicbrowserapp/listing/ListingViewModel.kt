@@ -8,6 +8,7 @@ import com.shiraj.domain.model.GenreViewItem
 import com.shiraj.domain.model.Output
 import com.shiraj.domain.usecase.AlbumUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -40,27 +41,32 @@ class ListingViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Method to search data from album list.
+     */
     internal fun getSearchData(newText: String?): List<GenreViewItem> {
-        newInfoList.clear()
-        newAlbumList.clear()
-        newText?.let {
-            if (it.length > 2) {
-                genreViewItems.forEach { info ->
-                    info.albumView.forEach { albumView ->
-                        if (albumView.albumName.contains(newText, ignoreCase = true)) {
-                            newAlbumList.add(
-                                GenreViewItem.AlbumView(
-                                    albumView.artistName,
-                                    albumView.albumName,
-                                    albumView.artworkUrl100
+        viewModelScope.launch(Dispatchers.IO) {
+            newInfoList.clear()
+            newAlbumList.clear()
+            newText?.let {
+                if (it.length > 2) {
+                    genreViewItems.forEach { info ->
+                        info.albumView.forEach { albumView ->
+                            if (albumView.albumName.contains(newText, ignoreCase = true)) {
+                                newAlbumList.add(
+                                    GenreViewItem.AlbumView(
+                                        albumView.artistName,
+                                        albumView.albumName,
+                                        albumView.artworkUrl100
+                                    )
                                 )
-                            )
-                            newInfoList.add(
-                                GenreViewItem(
-                                    info.genreName,
-                                    newAlbumList.toList()
+                                newInfoList.add(
+                                    GenreViewItem(
+                                        info.genreName,
+                                        newAlbumList.toList()
+                                    )
                                 )
-                            )
+                            }
                         }
                     }
                 }

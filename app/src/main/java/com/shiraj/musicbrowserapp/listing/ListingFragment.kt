@@ -14,7 +14,7 @@ class ListingFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     private val listingViewModel: ListingViewModel by viewModels()
     private lateinit var binding: FragmentListingBinding
-    private lateinit var albumListingAdapter: AlbumListingAdapter
+    private lateinit var genreListingAdapter: GenreListingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,9 +35,9 @@ class ListingFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
     override fun subscribeUI() {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.listing_title)
-        albumListingAdapter = AlbumListingAdapter()
+        genreListingAdapter = GenreListingAdapter()
         binding.apply {
-            rvGenre.adapter = albumListingAdapter
+            rvGenre.adapter = genreListingAdapter
         }
         listingViewModel.album.observe(viewLifecycleOwner) { result ->
             when (result.status) {
@@ -45,7 +45,7 @@ class ListingFragment : BaseFragment(), SearchView.OnQueryTextListener {
                     result.data?.let { list ->
                         binding.loading.hide()
                         listingViewModel.genreViewItems = list
-                        albumListingAdapter.list = list
+                        genreListingAdapter.genreList = list
                     }
                 }
 
@@ -70,7 +70,7 @@ class ListingFragment : BaseFragment(), SearchView.OnQueryTextListener {
 
         searchItem?.let {
             val searchView = it.actionView as SearchView
-            searchView.queryHint = "Search Album"
+            searchView.queryHint = getString(R.string.search_album)
             searchView.setOnQueryTextListener(this)
         }
     }
@@ -80,10 +80,17 @@ class ListingFragment : BaseFragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        albumListingAdapter.list = listingViewModel.getSearchData(newText)
+        val searchResult = listingViewModel.getSearchData(newText)
+        if (searchResult.isNullOrEmpty() && newText?.length!! > 2) {
+            binding.tvNoResult.visibility = View.VISIBLE
+            genreListingAdapter.genreList = emptyList()
+        } else {
+            genreListingAdapter.genreList = searchResult
+            binding.tvNoResult.visibility = View.GONE
+        }
         newText?.let { query ->
             if (query.length < 3)
-                albumListingAdapter.list = listingViewModel.genreViewItems
+                genreListingAdapter.genreList = listingViewModel.genreViewItems
         }
         return true
     }

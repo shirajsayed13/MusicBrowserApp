@@ -18,6 +18,10 @@ import javax.inject.Inject
 internal class AlbumRepositoryImpl @Inject constructor(
     private val albumRemoteDataSource: AlbumRemoteDataSource
 ) : AlbumRepository {
+
+    /**
+     * Method to fetch album from remote API.
+     */
     override suspend fun fetchAlbum(): Flow<Output<List<GenreViewItem>>?> {
         return flow {
             emit(Output.loading())
@@ -27,6 +31,9 @@ internal class AlbumRepositoryImpl @Inject constructor(
     }
 
 
+    /**
+     * Method to Group albums by genres data from remote album list.
+     */
     private fun parseAlbumData(feed: Album.Feed): Output<List<GenreViewItem>> {
         val map = mutableMapOf<String, MutableList<GenreViewItem.AlbumView>>()
         lateinit var albumView: MutableList<GenreViewItem.AlbumView>
@@ -44,7 +51,6 @@ internal class AlbumRepositoryImpl @Inject constructor(
                             )
                         }
                     }
-
                 } else {
                     albumView = mutableListOf()
                     albumView.add(
@@ -58,7 +64,7 @@ internal class AlbumRepositoryImpl @Inject constructor(
                 }
             }
         }
-        val genreViewItem = mutableListOf<GenreViewItem>()
+        val genreViewItem by lazy { mutableListOf<GenreViewItem>() }
         map.forEach { updateMap ->
             genreViewItem.add(GenreViewItem(updateMap.key, updateMap.value))
         }

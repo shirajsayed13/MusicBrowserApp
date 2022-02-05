@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import com.shiraj.domain.model.GenreViewItem
 import com.shiraj.musicbrowserapp.base.BaseFragment
@@ -35,9 +34,7 @@ class DetailFragment : BaseFragment() {
     }
 
     override fun subscribeUI() {
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
+
     }
 
     companion object {
