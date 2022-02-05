@@ -17,11 +17,4 @@ Kotlin Flow, ConstraintLayout, Data-Binding, Navigation Graph etc.
 
 ##Screenshots
 
-##GenreListing Screen
-![1](/screenshots/GenreListing.jpeg)
-##SearchResult Screen
-![2](/screenshots/SearchResult.jpeg)
-##NoSearchResult Screen
-![3](/screenshots/NoSearchResult.jpeg)
-##AlbumDetail Screen
-![4](/screenshots/AlbumDetailScreen.jpeg)
+![1](/screenshots/GenreListing.jpeg)![2](/screenshots/SearchResult.jpeg)![3](/screenshots/NoSearchResult.jpeg)![4](/screenshots/AlbumDetailScreen.jpeg)
