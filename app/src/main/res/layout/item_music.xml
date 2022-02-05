@@ -17,6 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_4dp"
         android:padding="4dp">
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -34,8 +35,9 @@
             android:id="@+id/tv_album_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
-            android:maxLength="20"
+            android:maxLength="15"
             android:padding="2dp"
             android:text="@{item.albumName}"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLength="20"
+            android:maxLength="15"
             android:padding="2dp"
             android:text="@{item.artistName}"
             app:layout_constraintBottom_toBottomOf="parent"
