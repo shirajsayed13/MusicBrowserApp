@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shiraj.domain.model.Output
 import com.shiraj.musicbrowserapp.MainActivity
 import com.shiraj.musicbrowserapp.R
@@ -61,6 +62,17 @@ class ListingFragment : BaseFragment(), SearchView.OnQueryTextListener {
                     binding.loading.show()
                 }
             }
+        }
+
+        /**
+         * Navigating to Detail fragment from listing fragment to display Album view.
+         */
+        genreListingAdapter.onAlbumClickListener = { albumView ->
+            findNavController().navigate(
+                ListingFragmentDirections.actionListingFragmentToDetailFragment(
+                    albumView
+                )
+            )
         }
     }
 

@@ -17,6 +17,8 @@ class GenreListingAdapter : RecyclerView.Adapter<GenreListingAdapter.AlbumListin
         notifyDataSetChanged()
     }
 
+    internal var onAlbumClickListener: (GenreViewItem.AlbumView) -> Unit = { _ -> }
+
     inner class AlbumListingViewHolder(
         private val binding: ItemGenreBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -37,6 +39,9 @@ class GenreListingAdapter : RecyclerView.Adapter<GenreListingAdapter.AlbumListin
             binding.item = item
             binding.position = adapterPosition
             albumListingAdapter.albumList = item.albumView
+            albumListingAdapter.apply {
+                onAlbumClickListener = this@GenreListingAdapter.onAlbumClickListener
+            }
         }
     }
 

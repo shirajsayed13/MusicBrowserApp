@@ -14,10 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_artwork"
-            android:layout_width="0dp"
-            android:layout_height="400dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="60dp"
             android:contentDescription="@string/app_name"
             android:transitionName="@{item.artworkUrl100}"
             app:imageUrl="@{item.artworkUrl100}"
@@ -26,17 +27,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/RoundCornerImageViewShape"
             tools:src="@drawable/ic_music_player" />
 
         <TextView
             android:id="@+id/tv_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
             android:text="@string/label_genre_name"
             android:textAppearance="?attr/textAppearanceSubtitle2"
             android:textColor="@color/planeSecondaryTextColor"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_artwork"
             tools:text="Artist Name" />
@@ -51,7 +55,7 @@
             android:textColor="@color/planePrimaryTextColor"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_name_label"
             app:layout_constraintTop_toBottomOf="@id/tv_name_label"
             tools:text="Lil Baby \&amp; Lil Durk" />
 
@@ -59,12 +63,13 @@
             android:id="@+id/tv_occupation_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:text="@string/label_artist_name"
             android:textAppearance="?attr/textAppearanceSubtitle2"
             android:textColor="@color/planeSecondaryTextColor"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="@id/tv_name_label"
             app:layout_constraintTop_toBottomOf="@id/tv_name"
             tools:text="Album Name" />
 
@@ -78,7 +83,7 @@
             android:textColor="@color/planePrimaryTextColor"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_name_label"
             app:layout_constraintTop_toBottomOf="@id/tv_occupation_label"
             tools:text="The Voice of the Heroes" />
     </androidx.constraintlayout.widget.ConstraintLayout>

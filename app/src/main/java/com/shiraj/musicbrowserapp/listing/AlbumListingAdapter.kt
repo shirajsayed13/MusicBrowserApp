@@ -15,7 +15,7 @@ import kotlin.properties.Delegates
 class AlbumListingAdapter @Inject constructor() :
     RecyclerView.Adapter<AlbumListingAdapter.AlbumListingViewHolder>() {
 
-    internal var onAlbumClickListener: (GenreViewItem.AlbumView, Int) -> Unit = { _, _ -> }
+    internal var onAlbumClickListener: (GenreViewItem.AlbumView) -> Unit = { _ -> }
 
     internal var albumList: List<GenreViewItem.AlbumView> by
     Delegates.observable(listOf()) { _, _, _ -> notifyDataSetChanged() }
@@ -39,7 +39,7 @@ class AlbumListingAdapter @Inject constructor() :
             )
         ).apply {
             itemView.setOnClickListener {
-                onAlbumClickListener(albumList[adapterPosition], adapterPosition)
+                onAlbumClickListener(albumList[adapterPosition])
             }
         }
 
