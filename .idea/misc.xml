@@ -14,6 +14,8 @@
         <entry key="app/src/main/res/layout/item_genre.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/item_music.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/menu/listing_menu.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.36108273748723185" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/music_player_icon.xml" value="0.36108273748723185" />
       </map>
     </option>
   </component>

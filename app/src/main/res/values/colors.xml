@@ -12,4 +12,5 @@
     <color name="planeSecondaryTextColor">#696969</color>
     <color name="cardSecondaryTextColor">#919191</color>
     <color name="ic_launcher_background">#FFF</color>
+    <color name="music_player_icon_background">#FFFFFF</color>
 </resources>
