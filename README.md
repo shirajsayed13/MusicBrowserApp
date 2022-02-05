@@ -17,4 +17,4 @@ Kotlin Flow, ConstraintLayout, Data-Binding, Navigation Graph etc.
 
 ##Screenshots
 
-![1](MusicBrowserListingScreen.jpeg)
+![1](/screenshots/GenreListing.jpeg)![2](/screenshots/SearchResult.jpeg)![3](/screenshots/NoSearchResult.jpeg)![4](/screenshots/AlbumDetailScreen.jpeg)
