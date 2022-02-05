@@ -16,6 +16,7 @@ import com.shiraj.musicbrowserapp.databinding.ItemGenreBinding
 class AlbumListingAdapter(
     private val list: ArrayList<GenreViewItem>,
 ) : RecyclerView.Adapter<AlbumListingAdapter.AlbumListingViewHolder>() {
+
     inner class AlbumListingViewHolder(
         private val binding: ItemGenreBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -25,9 +26,9 @@ class AlbumListingAdapter(
         init {
             binding.apply {
                 rvGenre.apply {
+                    adapter = musicInnerListingAdapter
                     layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = musicInnerListingAdapter
                 }
             }
         }
@@ -39,11 +40,15 @@ class AlbumListingAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumListingViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemGenreBinding.inflate(inflater, parent, false)
-        return AlbumListingViewHolder(binding)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumListingViewHolder =
+        AlbumListingViewHolder(
+            ItemGenreBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+
 
     override fun onBindViewHolder(holder: AlbumListingViewHolder, position: Int) {
         holder.bind(list[position])

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_listingFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <argument
+            android:name="albumView"
+            app:argType="com.shiraj.domain.model.GenreViewItem$AlbumView" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"

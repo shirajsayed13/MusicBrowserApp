@@ -32,11 +32,13 @@ ext {
     def androidTestJunit = "1.1.3"
     def androidTestEspressoCore = "3.4.0"
     def picassoVersion = "2.5.2"
+    def navVersion = '2.3.3'
 
     classPaths = [
             gradlePath      : "com.android.tools.build:gradle:$gradleVersion",
             kotlinGradlePath: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinGradleVersion",
-            hiltPath        : "com.google.dagger:hilt-android-gradle-plugin:$hiltGradleVersion"
+            hiltPath        : "com.google.dagger:hilt-android-gradle-plugin:$hiltGradleVersion",
+            safeArgs        : "androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion"
     ]
 
     androidx = [

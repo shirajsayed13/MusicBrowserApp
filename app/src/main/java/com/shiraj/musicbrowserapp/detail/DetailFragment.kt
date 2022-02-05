@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
+import com.shiraj.domain.model.GenreViewItem
 import com.shiraj.musicbrowserapp.base.BaseFragment
 import com.shiraj.musicbrowserapp.databinding.FragmentDetailBinding
 
 
 class DetailFragment : BaseFragment() {
     private lateinit var binding: FragmentDetailBinding
+    private val albumViewItem by lazy { arguments?.getParcelable<GenreViewItem.AlbumView>(ITEM) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +26,7 @@ class DetailFragment : BaseFragment() {
             binding = FragmentDetailBinding.inflate(inflater, container, false)
             with(binding) {
                 lifecycleOwner = this@DetailFragment
+                item = albumViewItem
                 sharedElementEnterTransition =
                     TransitionInflater.from(context).inflateTransition(android.R.transition.move)
                 root
@@ -31,7 +35,9 @@ class DetailFragment : BaseFragment() {
     }
 
     override fun subscribeUI() {
-        TODO("Not yet implemented")
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     companion object {
