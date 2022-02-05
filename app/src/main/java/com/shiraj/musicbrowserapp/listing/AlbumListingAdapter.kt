@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shiraj.domain.model.GenreViewItem
 import com.shiraj.musicbrowserapp.databinding.ItemGenreBinding
+import kotlin.properties.Delegates
 
 /**
  * RecyclerView Adapter to display *GenreView*.
@@ -13,9 +14,11 @@ import com.shiraj.musicbrowserapp.databinding.ItemGenreBinding
  * @property list the list of GenreViewItem in this Adapter.
  * @property onAlbumClick is the item click listener.
  */
-class AlbumListingAdapter(
-    private val list: ArrayList<GenreViewItem>,
-) : RecyclerView.Adapter<AlbumListingAdapter.AlbumListingViewHolder>() {
+class AlbumListingAdapter : RecyclerView.Adapter<AlbumListingAdapter.AlbumListingViewHolder>() {
+
+    var list: List<GenreViewItem> by Delegates.observable(emptyList()) { _, _, _ ->
+        notifyDataSetChanged()
+    }
 
     inner class AlbumListingViewHolder(
         private val binding: ItemGenreBinding
@@ -55,10 +58,4 @@ class AlbumListingAdapter(
     }
 
     override fun getItemCount(): Int = list.size
-
-    fun update(newList: List<GenreViewItem>) {
-        list.clear()
-        list.addAll(newList)
-        notifyItemRangeChanged(0, list.size)
-    }
 }

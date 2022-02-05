@@ -4,6 +4,7 @@
     <string name="listing_title">Filmhub Music</string>
     <string name="label_artist_name">Artist Name</string>
     <string name="label_album_name">Album Name</string>
+    <string name="search">Search</string>
     <string name="label_genre_name">Genre Name</string>
     <string name="go_back">Go back</string>
 </resources>

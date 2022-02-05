@@ -37,7 +37,7 @@
             android:ellipsize="end"
             android:maxLength="20"
             android:padding="2dp"
-            android:text="@{item.artistName}"
+            android:text="@{item.albumName}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivMusic"
             tools:text="Album Name" />
@@ -49,7 +49,7 @@
             android:ellipsize="end"
             android:maxLength="20"
             android:padding="2dp"
-            android:text="@{item.albumName}"
+            android:text="@{item.artistName}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_album_name"
