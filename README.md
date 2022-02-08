@@ -11,7 +11,7 @@ Kotlin Flow, ConstraintLayout, Data-Binding, Navigation Graph etc.
 * Android Hilt - for Dependency Injection
 * Multi module Clean MVVM Architecture (For smooth scalability)
 * Navigation Graph - NavController for Fragment transitions
-* Unit testing - with Mockito & JUnit (Will add soom)
+* Unit testing - with Mockito & JUnit
 * Retrofit - for Network Requests
 * Picasso - for Image loading
 
