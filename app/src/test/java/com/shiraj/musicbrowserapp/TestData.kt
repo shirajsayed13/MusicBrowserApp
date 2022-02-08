@@ -1,4 +1,4 @@
-package com.shiraj.domain
+package com.shiraj.musicbrowserapp
 
 import com.shiraj.domain.model.GenreViewItem
 

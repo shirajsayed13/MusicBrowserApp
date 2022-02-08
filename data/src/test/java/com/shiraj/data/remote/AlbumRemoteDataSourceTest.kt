@@ -1,6 +1,7 @@
 package com.shiraj.data.remote
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.shiraj.data.getDummyAlbum
 import com.shiraj.data.service.ApiService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -35,6 +36,17 @@ class AlbumRemoteDataSourceTest {
     @Before
     fun setUp() {
         albumRemoteDataSource = AlbumRemoteDataSource(apiService, retrofit)
+    }
+
+    @Test
+    fun `Given Album When fetchAlbum returns Success`() = runBlocking {
+        //GIVEN
+        val givenAlbum = getDummyAlbum()
+        Mockito.`when`(apiService.getAlbums()).thenReturn(Response.success(givenAlbum))
+        //WHEN
+        val fetchAlbum = albumRemoteDataSource.fetchAlbums()
+        //THEN
+        assert(fetchAlbum.data?.feed?.results?.size == givenAlbum.feed.results.size)
     }
 
     @Test
